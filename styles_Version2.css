@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FBF9F4;
+    color: #3D405B;
+}
+.active-nav {
+    background-color: #81B29A;
+    color: #FFFFFF;
+}
+.inactive-nav {
+    background-color: #F3F4F6;
+    color: #3D405B;
+}
+.process-step {
+    transition: all 0.3s ease-in-out;
+    border-color: #D1D5DB;
+}
+.process-step.active {
+    border-color: #81B29A;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 300px;
+    max-height: 400px;
+}
+@media (min-width: 768px) {
+    .chart-container {
+        height: 350px;
+    }
+}

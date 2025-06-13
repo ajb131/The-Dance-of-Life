@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Intricate Dance of Life: Seed Germination & Respiration</title>
+    <meta name="description" content="An interactive exploration of seed germination and plant respiration.">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex items-center justify-between">
+                <h1 class="text-xl md:text-2xl font-bold text-[#81B29A]">The Dance of Life</h1>
+                <div class="hidden md:flex space-x-4">
+                    <a href="#germination" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-200">Germination</a>
+                    <a href="#respiration" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-200">Respiration</a>
+                    <a href="#factors" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-200">Environment</a>
+                    <a href="#internal" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-200">Internal Controls</a>
+                    <a href="#stress" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-200">Stress</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        
+        <section id="hero" class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">The Intricate Dance of Life</h2>
+            <p class="max-w-3xl mx-auto text-lg text-gray-600">Explore the two fundamental processes that initiate and sustain plant life: the miraculous awakening of a seed (germination) and the constant energy production that fuels it (respiration). This interactive guide translates complex biology into an explorable journey.</p>
+        </section>
+
+        <section id="germination" class="mb-16 scroll-mt-20">
+            <h3 class="text-3xl font-bold text-center mb-2">The Journey of a Seed</h3>
+            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Germination is a carefully orchestrated sequence of events. Click on each stage below to follow the journey from a dormant seed to an established seedling, powered by the energy unlocked through respiration.</p>
+            
+            <div id="germination-steps-container" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-6"></div>
+            <div id="germination-details" class="p-6 bg-white rounded-lg shadow-md transition-all duration-500 min-h-[150px]"></div>
+        </section>
+
+        <section id="respiration" class="mb-16 scroll-mt-20">
+            <h3 class="text-3xl font-bold text-center mb-2">The Spark of Life: Respiration</h3>
+            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Respiration is how plants convert stored food into usable energy (ATP) to power all life processes, including germination. The primary method requires oxygen (Aerobic), but a backup plan exists for low-oxygen conditions (Anaerobic). Use the buttons to compare these pathways.</p>
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex rounded-md shadow-sm">
+                    <button id="show-aerobic" class="px-4 py-2 text-sm font-semibold active-nav rounded-l-lg">Aerobic Respiration</button>
+                    <button id="show-anaerobic" class="px-4 py-2 text-sm font-semibold inactive-nav rounded-r-lg">Anaerobic Respiration</button>
+                </div>
+            </div>
+            <div id="respiration-content"></div>
+        </section>
+
+        <section id="factors" class="mb-16 scroll-mt-20">
+            <h3 class="text-3xl font-bold text-center mb-2">The Environmental Controller</h3>
+            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">A seed's decision to germinate is heavily influenced by its environment. Use the interactive controls below to see how key external factors like temperature, water, oxygen, and light act as signals for a seed to begin its journey.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold mb-4 text-center">🌡️ Temperature Control</h4>
+                    <p class="text-sm text-gray-500 mb-4 text-center">Adjust the slider to see how temperature affects enzyme activity and respiration rates.</p>
+                    <input id="temp-slider" type="range" min="0" max="60" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    <div class="text-center font-bold text-lg my-2"><span id="temp-value">20</span>°C</div>
+                    <div id="temp-feedback" class="p-4 bg-gray-50 rounded-md text-center text-gray-700 min-h-[80px]"></div>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold mb-4 text-center">💡 Light Signal (Photoblasty)</h4>
+                    <p class="text-sm text-gray-500 mb-4 text-center">Select a light condition to learn how it can promote or inhibit germination in different species.</p>
+                    <div class="flex justify-center space-x-2 mb-4">
+                         <button data-photoblasty="positive" class="photo-btn px-3 py-2 text-sm font-semibold inactive-nav rounded-md">Positive</button>
+                         <button data-photoblasty="negative" class="photo-btn px-3 py-2 text-sm font-semibold inactive-nav rounded-md">Negative</button>
+                         <button data-photoblasty="neutral" class="photo-btn px-3 py-2 text-sm font-semibold inactive-nav rounded-md">Neutral</button>
+                    </div>
+                    <div id="light-feedback" class="p-4 bg-gray-50 rounded-md text-gray-700 min-h-[80px]"></div>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <h4 class="text-xl font-semibold mb-4 text-center">💧 Water & 💨 Oxygen</h4>
+                    <p class="text-center text-gray-600">Water and oxygen are the non-negotiable requirements for germination and respiration.</p>
+                    <div class="mt-4 space-y-3">
+                        <div class="p-4 bg-blue-50 border-l-4 border-blue-400">
+                            <h5 class="font-bold">Water (H₂O)</h5>
+                            <p class="text-sm text-gray-700">Triggers imbibition, activating the seed's metabolism. Without it, the journey cannot begin.</p>
+                        </div>
+                        <div class="p-4 bg-green-50 border-l-4 border-green-500">
+                            <h5 class="font-bold">Oxygen (O₂)</h5>
+                            <p class="text-sm text-gray-700">Essential fuel for aerobic respiration, which generates the vast majority of the energy needed for growth.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-md flex flex-col">
+                    <h4 class="text-xl font-semibold mb-4 text-center">Temperature vs. Respiration Rate</h4>
+                    <p class="text-sm text-gray-500 mb-4 text-center">This chart illustrates the general relationship between temperature and respiration.</p>
+                    <div class="chart-container flex-grow">
+                        <canvas id="tempRespirationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="internal" class="mb-16 scroll-mt-20">
+            <h3 class="text-3xl font-bold text-center mb-2">Internal Programming</h3>
+            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Beyond external cues, seeds have internal controls that dictate when germination occurs. These include dormancy mechanisms and a delicate hormonal balance. Click the cards to learn more.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                 <div class="internal-card p-6 bg-white rounded-lg shadow-md cursor-pointer hover:shadow-xl transition-shadow">
+                    <h4 class="text-xl font-semibold mb-3">🌱 Seed Dormancy</h4>
+                    <p class="text-gray-600 text-sm mb-4">A survival strategy to prevent germination until conditions are truly optimal, not just suitable.</p>
+                    <div class="details hidden mt-4 space-y-2 text-sm">
+                        <p><strong>Physiological:</strong> Most common type, caused by internal chemical inhibitors. Broken by chilling (stratification).</p>
+                        <p><strong>Physical:</strong> A hard, waterproof seed coat prevents water uptake. Broken by scratching (scarification).</p>
+                        <p><strong>Morphological:</strong> The embryo is underdeveloped and needs time to mature before germinating.</p>
+                    </div>
+                </div>
+                <div class="internal-card p-6 bg-white rounded-lg shadow-md cursor-pointer hover:shadow-xl transition-shadow">
+                    <h4 class="text-xl font-semibold mb-3">⚖️ Hormonal Balance</h4>
+                    <p class="text-gray-600 text-sm mb-4">A tug-of-war between two key hormones, Abscisic Acid (ABA) and Gibberellins (GA), acts as the master switch.</p>
+                     <div class="details hidden mt-4 space-y-2 text-sm">
+                        <p>🔴 <strong>Abscisic Acid (ABA):</strong> The "Brake". Promotes and maintains dormancy, preventing germination.</p>
+                        <p>🟢 <strong>Gibberellins (GA):</strong> The "Accelerator". Promotes germination and helps break dormancy.</p>
+                        <p>The ratio of ABA to GA determines the outcome. Environmental cues can shift this balance.</p>
+                    </div>
+                </div>
+                <div class="internal-card p-6 bg-white rounded-lg shadow-md cursor-pointer hover:shadow-xl transition-shadow">
+                    <h4 class="text-xl font-semibold mb-3">🔓 Breaking Dormancy</h4>
+                    <p class="text-gray-600 text-sm mb-4">Humans can mimic natural processes to encourage uniform germination for agriculture.</p>
+                     <div class="details hidden mt-4 space-y-2 text-sm">
+                        <p><strong>Stratification:</strong> A period of moist-chilling or moist-warming to overcome physiological dormancy.</p>
+                        <p><strong>Scarification:</strong> Mechanically or chemically weakening the seed coat to allow water entry.</p>
+                        <p><strong>Hormones:</strong> Applying Gibberellic acid (GA) can directly trigger germination.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stress" class="scroll-mt-20">
+            <h3 class="text-3xl font-bold text-center mb-2">Surviving the Extremes</h3>
+            <p class="text-center text-gray-600 mb-8 max-w-2xl mx-auto">Abiotic stresses are major challenges for plants. See how drought, salinity, and heat can negatively impact both germination and respiration, threatening plant survival and crop yields.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 bg-white rounded-lg shadow-md border-t-4 border-[#E07A5F]">
+                    <h4 class="text-xl font-semibold mb-3 flex items-center"><span class="text-2xl mr-3">🏜️</span>Drought Stress</h4>
+                    <p class="text-gray-600 text-sm"><strong>Germination:</strong> Inhibits water uptake (imbibition), preventing the process from starting.</p>
+                    <p class="text-gray-600 text-sm mt-2"><strong>Respiration:</strong> Stomata close to save water, reducing O₂ intake and slowing respiration.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-md border-t-4 border-[#81B29A]">
+                    <h4 class="text-xl font-semibold mb-3 flex items-center"><span class="text-2xl mr-3">🧂</span>Salinity Stress</h4>
+                    <p class="text-gray-600 text-sm"><strong>Germination:</strong> Creates osmotic stress, making it difficult for seeds to absorb water. Can also be toxic.</p>
+                    <p class="text-gray-600 text-sm mt-2"><strong>Respiration:</strong> High salt concentrations can reduce overall metabolic activity, including respiration.</p>
+                </div>
+                <div class="p-6 bg-white rounded-lg shadow-md border-t-4 border-[#F2C14E]">
+                    <h4 class="text-xl font-semibold mb-3 flex items-center"><span class="text-2xl mr-3">🔥</span>Heat Stress</h4>
+                    <p class="text-gray-600 text-sm"><strong>Germination:</strong> Extreme heat can damage or denature essential enzymes, halting germination.</p>
+                    <p class="text-gray-600 text-sm mt-2"><strong>Respiration:</strong> Rate increases to a point, but can become wasteful and exceed photosynthesis, depleting energy reserves.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white mt-16 border-t">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-gray-500">
+            <p>Interactive Report created from scientific source material.</p>
+            <p class="text-sm mt-1">A simplified visualization of complex biological processes.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
